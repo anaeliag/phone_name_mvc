@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Agenda</title>
+</head>
+<body>
+    <h2>Agenda de Personas</h2>
+    <form th:object="${persona}" th:action="@{/agregar}" method="post">
+        <label>Nombre Completo:</label>
+        <input type="text" th:field="*{nombreCompleto}" required><br>
+        <span th:if="${#fields.hasErrors('nombreCompleto')}" th:errors="*{nombreCompleto}"></span><br>
+
+        <label>Teléfono:</label>
+        <input type="text" th:field="*{telefono}" required><br>
+        <span th:if="${#fields.hasErrors('telefono')}" th:errors="*{telefono}"></span><br>
+
+        <button type="submit">Agregar Persona</button>
+    </form>
+
+    <hr>
+
+    <h3>Lista de Personas</h3>
+    <table border="1">
+        <tr>
+            <th>Nombre Completo</th>
+            <th>Teléfono</th>
+        </tr>
+        <tr th:each="persona : ${personas}">
+            <td th:text="${persona.nombreCompleto}"></td>
+            <td th:text="${persona.telefonoFormateado}"></td>
+        </tr>
+    </table>
+</body>
+</html>
